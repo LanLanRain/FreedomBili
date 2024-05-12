@@ -2,7 +2,7 @@
  * 自定义条件查询异常类，用于处理在条件查询过程中出现的异常。
  * 继承自 RuntimeException，表示这是一种运行时异常。
  */
-package com.rainsoul.bilibili.dao.domain.exception;
+package com.rainsoul.bilibili.domain.exception;
 
 public class ConditionException extends RuntimeException {
     public static final long serialVersionUID = 1L; // 序列化ID，用于版本控制。

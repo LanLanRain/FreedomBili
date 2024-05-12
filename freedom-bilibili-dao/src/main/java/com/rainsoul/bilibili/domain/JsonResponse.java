@@ -1,4 +1,4 @@
-package com.rainsoul.bilibili.dao.domain;
+package com.rainsoul.bilibili.domain;
 
 /**
  * 用于封装API响应的类。

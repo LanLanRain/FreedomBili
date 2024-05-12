@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainsoul.bilibili.dao.UserDao">
+    <!-- 插入新用户信息到t_user表中 -->
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user(phone, email, password, salt, createTime, updateTime)
+        values (#{phone}, #{email}, #{password}, #{salt}, #{createTime}, #{updateTime})
+    </insert>
+
+    <insert id="addUserInfo" parameterType="com.rainsoul.bilibili.domain.UserInfo">
+        insert into t_user_info(userId, nick, avatar, sign, gender, birth, createTime, updateTime)
+        values (#{userId}, #{nick}, #{avatar}, #{sign}, #{gender}, #{birth}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!-- 根据手机号查询用户信息 -->
+    <select id="getUserByPhone" resultType="com.rainsoul.bilibili.domain.User">
+        select *
+        from t_user
+        where phone = #{phone}
+    </select>
+
+</mapper>

@@ -8,6 +8,12 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/dataSources.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/sqldialects.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
 *.iws
 *.iml
 *.ipr
@@ -38,3 +44,4 @@ build/
 .DS_Store
 
 application-test-copy.yml
+/.idea/

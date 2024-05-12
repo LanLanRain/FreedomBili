@@ -1,7 +1,7 @@
 package com.rainsoul.bilibili.service.handler;
 
-import com.rainsoul.bilibili.dao.domain.JsonResponse;
-import com.rainsoul.bilibili.dao.domain.exception.ConditionException;
+import com.rainsoul.bilibili.domain.JsonResponse;
+import com.rainsoul.bilibili.domain.exception.ConditionException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
