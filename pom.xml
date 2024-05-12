@@ -9,12 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0</version>
-    </parent>
-
     <modules>
         <module>freedom-bilibili-dao</module>
         <module>freedom-bilibili-service</module>
@@ -27,33 +21,65 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.0</version>
+    </parent>
+
     <dependencies>
+        <!-- Spring Boot Web Starter: 提供了构建Web应用的基础功能，包括Spring MVC和Tomcat嵌入式服务器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>3.1.0</version>
         </dependency>
+
+        <!-- MySQL Connector/J: 用于连接MySQL数据库的Java驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
+
+        <!-- MyBatis Spring Boot Starter: 集成MyBatis框架到Spring Boot应用的启动器 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>3.0.3</version>
         </dependency>
+
+        <!-- MyBatis Spring Boot Test Starter: 用于MyBatis的测试支持，包含Spring Boot测试相关的库 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter-test</artifactId>
             <version>3.0.3</version>
-            <scope>test</scope>
+            <scope>test</scope> <!-- 仅在测试时使用 -->
         </dependency>
+
+        <!-- Spring Boot DevTools: 提供额外的开发工具特性，如自动重启应用、LiveReload等 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
+            <scope>runtime</scope> <!-- 在运行时需要 -->
         </dependency>
+
+        <!-- 引入commons-codec库，用于提供编码和解码功能 -->
+        <dependency>
+            <groupId>commons-codec</groupId> <!-- 库的组织标识 -->
+            <artifactId>commons-codec</artifactId> <!-- 库的名称 -->
+            <version>1.16.0</version> <!-- 库的版本 -->
+        </dependency>
+
+        <!-- 引入阿里巴巴的fastjson依赖 -->
+        <dependency>
+            <groupId>com.alibaba</groupId> <!-- 依赖的组织ID -->
+            <artifactId>fastjson</artifactId> <!-- 依赖的模块ID -->
+            <version>2.0.34</version> <!-- 依赖的版本号 -->
+        </dependency>
+
+
     </dependencies>
+
 
 </project>
