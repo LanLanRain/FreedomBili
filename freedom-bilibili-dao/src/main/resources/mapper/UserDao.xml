@@ -86,5 +86,43 @@
         </if>
     </select>
 
+    <!--
+    根据条件查询用户信息的总数
+    @param nick 用户昵称，可选参数，用于筛选符合条件的用户数量
+    @return 返回满足查询条件的用户数量
+    -->
+    <select id="pageCountUserInfos" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1)
+        from t_user_info
+        where
+        1 = 1
+        <!-- 如果传入的nick参数不为空且不为空字符串，则在查询条件中添加昵称模糊匹配 -->
+        <if test="nick != null and nick != ''">
+            and nick like concat('%', #{nick}, '%')
+        </if>
+    </select>
+
+    <!--
+     根据条件查询用户信息列表，支持昵称模糊搜索，并进行分页处理。
+
+     参数说明:
+     - parameterType: java.util.Map, 包含查询参数的键值对。
+       - nick: 可选，用于昵称模糊匹配的字符串。
+     - resultType: com.rainsoul.bilibili.domain.UserInfo, 查询结果的实体类型。
+
+     返回值: 分页后的用户信息列表。
+    -->
+    <select id="pageListUserInfos" parameterType="java.util.Map" resultType="com.rainsoul.bilibili.domain.UserInfo">
+        select *
+        from t_user_info
+        where
+        1 = 1
+        <!-- 如果传入的nick参数不为空且不为空字符串，则在查询条件中添加昵称模糊匹配 -->
+        <if test="nick != null and nick != ''">
+            and nick like concat('%', #{nick}, '%')
+        </if>
+        order by id desc
+        limit #{start}, #{limit}
+    </select>
 
 </mapper>

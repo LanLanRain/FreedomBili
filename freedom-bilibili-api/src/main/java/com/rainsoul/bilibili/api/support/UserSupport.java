@@ -16,7 +16,7 @@ public class UserSupport {
      * @return Long 当前用户的ID。
      * @throws ConditionException 如果token验证失败，抛出此异常。
      */
-    public Long getCuurrentUserId() {
+    public Long getCurrentUserId() {
         // 获取当前请求的属性
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         // 从请求头中获取token

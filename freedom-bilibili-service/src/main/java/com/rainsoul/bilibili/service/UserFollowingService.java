@@ -162,4 +162,45 @@ public class UserFollowingService {
         return fansList;
     }
 
+    /**
+     * 添加用户关注的群组。
+     *
+     * @param followingGroup 关注的群组对象，包含群组信息。
+     * @return 返回添加的群组的ID。
+     */
+    public Long addUserFollowingGroups(FollowingGroup followingGroup) {
+        followingGroup.setCreateTime(new Date());
+        // 设置群组类型为用户自定义类型
+        followingGroup.setType(UserConstant.USER_FOLLOWING_GROUP_TYPE_USER);
+        followingGroupService.addFollowingGroup(followingGroup);
+        return followingGroup.getId();
+    }
+
+
+    public List<FollowingGroup> getUserFollowingGroups(Long userId) {
+        return followingGroupService.getUserFollowingGroups(userId);
+    }
+
+    /**
+     * 检查用户是否关注了指定的一组用户。
+     *
+     * @param userId 当前用户的ID，用于查询其关注列表。
+     * @param userInfoList 需要检查是否被关注的用户信息列表。
+     * @return 返回更新后的用户信息列表，其中包含了是否被关注的标记。
+     */
+    public List<UserInfo> checkFollowingStatus(Long userId, List<UserInfo> userInfoList) {
+        // 查询当前用户的所有关注者列表
+        List<UserFollowing> userFollingList = userFollowingDao.getUserFollowings(userId);
+        for (UserInfo userInfo : userInfoList) {
+            userInfo.setFollowed(false); // 默认设置为未关注
+            for (UserFollowing userFollowing : userFollingList) {
+                // 检查当前用户是否在关注列表中
+                if (userInfo.getUserId().equals(userFollowing.getFollowingId())) {
+                    userInfo.setFollowed(true); // 设置为已关注
+                    break; // 找到后即跳出内层循环
+                }
+            }
+        }
+        return userInfoList; // 返回更新后的用户信息列表
+    }
 }

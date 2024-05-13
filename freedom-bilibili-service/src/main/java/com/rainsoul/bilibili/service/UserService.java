@@ -1,7 +1,9 @@
 package com.rainsoul.bilibili.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mysql.cj.util.StringUtils;
 import com.rainsoul.bilibili.dao.UserDao;
+import com.rainsoul.bilibili.domain.PageResult;
 import com.rainsoul.bilibili.domain.User;
 import com.rainsoul.bilibili.domain.UserInfo;
 import com.rainsoul.bilibili.domain.constant.UserConstant;
@@ -12,6 +14,7 @@ import com.rainsoul.bilibili.service.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -70,6 +73,7 @@ public class UserService {
 
     /**
      * 用户登录
+     *
      * @param user 用户对象，包含手机号和密码
      * @return 返回登录成功后的token
      * @throws ConditionException 如果手机号为空、用户不存在、密码解密失败、密码错误则抛出异常
@@ -130,5 +134,19 @@ public class UserService {
 
     public List<UserInfo> getUserInfoByUserIds(Set<Long> userIdList) {
         return userDao.getUserInfoByUserIds(userIdList);
+    }
+
+    public PageResult<UserInfo> pageListUserInfos(JSONObject params) {
+        Integer pageNum = params.getInteger("pageNum");
+        Integer pageSize = params.getInteger("pageSize");
+        Integer start = (pageNum - 1) * pageSize;
+        params.put("start", start);
+        params.put("limit", pageSize);
+        Integer total = userDao.pageCountUserInfos(params);
+        List<UserInfo> userInfoList = new ArrayList<>(total);
+        if (total > 0){
+            userInfoList = userDao.pageListUserInfos(params);
+        }
+        return new PageResult<>(total, userInfoList);
     }
 }
