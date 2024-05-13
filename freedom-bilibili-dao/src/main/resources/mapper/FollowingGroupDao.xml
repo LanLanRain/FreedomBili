@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainsoul.bilibili.dao.FollowingGroupDao">
+    <!-- 根据类型获取关注分组列表 -->
+    <select id="getByType" resultType="com.rainsoul.bilibili.domain.FollowingGroup">
+        select *
+        from t_following_group
+        where type = #{type}
+    </select>
+
+    <!-- 根据ID获取特定的关注分组 -->
+    <select id="getById" resultType="com.rainsoul.bilibili.domain.FollowingGroup">
+        select *
+        from t_following_group
+        where id = #{id}
+    </select>
+</mapper>

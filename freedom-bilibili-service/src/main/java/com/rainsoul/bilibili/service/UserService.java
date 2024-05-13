@@ -121,4 +121,8 @@ public class UserService {
         userInfo.setUpdateTime(new Date());
         userDao.updateUserInfo(userInfo);
     }
+
+    public User getUserById(Long followingId) {
+        return userDao.getUserById(followingId);
+    }
 }
