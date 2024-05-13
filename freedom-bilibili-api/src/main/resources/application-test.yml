@@ -4,3 +4,14 @@ spring:
     url: jdbc:mysql://localhost:3306/bilibili
     username: root
     password: root
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+
+rocketmq:
+  name:
+    server:
+      address: 127.0.0.1:9876
+

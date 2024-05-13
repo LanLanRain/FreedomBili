@@ -27,7 +27,7 @@ public class UserApi {
     private UserSupport userSupport;
 
     @Autowired
-    private UserFollowingService userFollingService
+    private UserFollowingService userFollingService;
 
     /**
      * 获取当前用户的信息
