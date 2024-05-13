@@ -78,6 +78,13 @@
             <version>2.0.34</version> <!-- 依赖的版本号 -->
         </dependency>
 
+        <!-- 引入 com.auth0 的 java-jwt 库 -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.19.0</version>
+        </dependency>
+
 
     </dependencies>
 

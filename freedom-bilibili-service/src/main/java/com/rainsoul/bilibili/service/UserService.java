@@ -72,7 +72,7 @@ public class UserService {
      * @return 返回登录成功后的token
      * @throws ConditionException 如果手机号为空、用户不存在、密码解密失败、密码错误则抛出异常
      */
-    public String login(User user) {
+    public String login(User user) throws Exception {
         // 验证手机号是否为空
         String phone = user.getPhone();
         if (StringUtils.isNullOrEmpty(phone)) {
@@ -110,4 +110,10 @@ public class UserService {
         return TokenUtil.generateToken(dbUser.getId());
     }
 
+    public User getUserInfo(Long userId) {
+        User user = userDao.getUserById(userId);
+        UserInfo userInfo = userDao.getUserInfoByUserId(userId);
+        user.setUserInfo(userInfo);
+        return user;
+    }
 }

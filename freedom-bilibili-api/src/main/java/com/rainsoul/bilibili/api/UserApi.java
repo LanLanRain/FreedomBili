@@ -1,5 +1,6 @@
 package com.rainsoul.bilibili.api;
 
+import com.rainsoul.bilibili.api.support.UserSupport;
 import com.rainsoul.bilibili.domain.JsonResponse;
 import com.rainsoul.bilibili.domain.User;
 import com.rainsoul.bilibili.service.UserService;
@@ -16,13 +17,23 @@ public class UserApi {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserSupport userSupport;
+
+    @GetMapping(value = "/users")
+    public JsonResponse<User> getUserInfo() {
+        Long userId = userSupport.getCuurrentUserId();
+        User user = userService.getUserInfo(userId);
+        return new JsonResponse<>(user);
+    }
+
     @GetMapping(value = "/rsa-pks")
     public JsonResponse<String> getRsaPublicKey() {
         String publicKeyStr = RSAUtil.getPublicKeyStr();
         return JsonResponse.success(publicKeyStr);
     }
 
-    @GetMapping(value = "/users")
+    @PostMapping(value = "/users")
     public JsonResponse<String> addUser(@RequestBody User user) {
         userService.addUser(user);
         return JsonResponse.success();

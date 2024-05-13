@@ -2,22 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rainsoul.bilibili.dao.UserDao">
-    <!-- 插入新用户信息到t_user表中 -->
+    <!-- 插入新用户信息到t_user表中。使用了自动生成的主键，通过keyProperty属性指定主键id的映射。 -->
     <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
-        insert into t_user(phone, email, password, salt, createTime, updateTime)
+        insert into t_user (phone, email, password, salt, createTime, updateTime)
         values (#{phone}, #{email}, #{password}, #{salt}, #{createTime}, #{updateTime})
     </insert>
 
+    <!-- 插入用户详细信息到t_user_info表中。参数为UserInfo对象，包含了用户的详细属性。 -->
     <insert id="addUserInfo" parameterType="com.rainsoul.bilibili.domain.UserInfo">
         insert into t_user_info(userId, nick, avatar, sign, gender, birth, createTime, updateTime)
         values (#{userId}, #{nick}, #{avatar}, #{sign}, #{gender}, #{birth}, #{createTime}, #{updateTime})
     </insert>
 
-    <!-- 根据手机号查询用户信息 -->
+    <!-- 根据手机号查询用户信息。返回类型为User对象。 -->
     <select id="getUserByPhone" resultType="com.rainsoul.bilibili.domain.User">
         select *
         from t_user
         where phone = #{phone}
+    </select>
+
+    <!-- 根据用户id查询用户信息。返回类型为User对象。 -->
+    <select id="getUserById" resultType="com.rainsoul.bilibili.domain.User">
+        select *
+        from t_user
+        where id = #{userId}
+    </select>
+
+    <!-- 根据用户id查询用户详细信息。返回类型为UserInfo对象。 -->
+    <select id="getUserInfoByUserId" resultType="com.rainsoul.bilibili.domain.UserInfo">
+        select *
+        from t_user_info
+        where userId = #{userId}
     </select>
 
 </mapper>

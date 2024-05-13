@@ -10,6 +10,29 @@ public class User {
     private String salt;
     private Date createTime;
     private Date updateTime;
+    private UserInfo userInfo;
+
+    public User() {
+    }
+
+    public User(Long id, String phone, String email, String password, String salt, Date createTime, Date updateTime, UserInfo userInfo) {
+        this.id = id;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.salt = salt;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.userInfo = userInfo;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
     public Long getId() {
         return id;
