@@ -14,6 +14,41 @@
         values (#{userId}, #{nick}, #{avatar}, #{sign}, #{gender}, #{birth}, #{createTime}, #{updateTime})
     </insert>
 
+    <!-- 更新用户信息的SQL语句。
+         参数说明：
+         - parameterType: com.rainsoul.bilibili.domain.UserInfo，表示传入的参数类型为UserInfo实体类。
+         更新的字段包括nick（昵称）、avatar（头像）、sign（签名）、gender（性别）、birth（生日）和updateTime（更新时间）。
+         具体更新哪些字段取决于传入的UserInfo对象中哪些字段不为空。
+    -->
+    <update id="updateUserInfo" parameterType="com.rainsoul.bilibili.domain.UserInfo">
+        update t_user_info
+        <set>
+            <!-- 如果nick不为空且不为零长度字符串，则更新nick字段 -->
+            <if test="nick != null and nick != '' ">
+                nick = #{nick},
+            </if>
+            <!-- 如果avatar不为空且不为零长度字符串，则更新avatar字段 -->
+            <if test="avatar != null and avatar != '' ">
+                avatar = #{avatar},
+            </if>
+            <!-- 如果sign不为空，则更新sign字段 -->
+            <if test="sign != null">
+                sign = #{sign},
+            </if>
+            <!-- 如果gender不为空且不为零长度字符串，则更新gender字段 -->
+            <if test="gender != null and gender != '' ">
+                gender = #{gender},
+            </if>
+            <!-- 如果birth不为空且不为零长度字符串，则更新birth字段 -->
+            <if test="birth != null and birth != '' ">
+                birth = #{birth},
+            </if>
+            <!-- 更新updateTime字段 -->
+            updateTime = #{updateTime}
+        </set>
+    </update>
+
+
     <!-- 根据手机号查询用户信息。返回类型为User对象。 -->
     <select id="getUserByPhone" resultType="com.rainsoul.bilibili.domain.User">
         select *

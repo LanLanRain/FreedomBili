@@ -116,4 +116,9 @@ public class UserService {
         user.setUserInfo(userInfo);
         return user;
     }
+
+    public void updateUserInfo(UserInfo userInfo) {
+        userInfo.setUpdateTime(new Date());
+        userDao.updateUserInfo(userInfo);
+    }
 }
