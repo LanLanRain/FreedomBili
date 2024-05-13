@@ -1,6 +1,7 @@
 package com.rainsoul.bilibili.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class FollowingGroup {
     private Long id;
@@ -10,16 +11,27 @@ public class FollowingGroup {
     private Date createTime;
     private Date updateTime;
 
+    private List<UserInfo> followingUserInfoList;
+
     public FollowingGroup() {
     }
 
-    public FollowingGroup(Long id, Long userId, String name, String type, Date createTime, Date updateTime) {
+    public FollowingGroup(Long id, Long userId, String name, String type, Date createTime, Date updateTime, List<UserInfo> followingUserInfoList) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.type = type;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.followingUserInfoList = followingUserInfoList;
+    }
+
+    public List<UserInfo> getFollowingUserInfoList() {
+        return followingUserInfoList;
+    }
+
+    public void setFollowingUserInfoList(List<UserInfo> followingUserInfoList) {
+        this.followingUserInfoList = followingUserInfoList;
     }
 
     public Long getId() {

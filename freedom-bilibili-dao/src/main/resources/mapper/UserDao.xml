@@ -70,4 +70,21 @@
         where userId = #{userId}
     </select>
 
+    <!-- 根据用户ID列表获取用户信息列表 -->
+    <select id="getUserInfoByUserIds" resultType="com.rainsoul.bilibili.domain.UserInfo">
+        select *
+        from t_user_info
+        where
+        1 = 1
+        <!-- 如果提供了用户ID列表并且列表非空，则在查询条件中加入用户ID的筛选 -->
+        <if test="userIdList != null and userIdList.size > 0">
+            and userId in
+            <!-- 遍历用户ID列表，生成SQL的in语句部分 -->
+            <foreach collection="userIdList" item="userId" index="index" open="(" separator="," close=")">
+                #{userId}
+            </foreach>
+        </if>
+    </select>
+
+
 </mapper>

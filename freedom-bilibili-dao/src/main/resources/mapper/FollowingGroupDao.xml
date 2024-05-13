@@ -14,4 +14,14 @@
         from t_following_group
         where id = #{id}
     </select>
+
+    <!-- 根据用户ID或类型查询关注分组信息 -->
+    <select id="getByUserId" resultType="com.rainsoul.bilibili.domain.FollowingGroup">
+        select *
+        from t_following_group
+        <!-- 查询条件包括用户ID和类型，其中类型限定为'0'、'1'或'2' -->
+        where userId = #{userId}
+           or type in ('0', '1', '2')
+    </select>
+
 </mapper>

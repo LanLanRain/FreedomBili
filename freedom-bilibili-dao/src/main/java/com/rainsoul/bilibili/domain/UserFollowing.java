@@ -9,15 +9,26 @@ public class UserFollowing {
     private Long groupId;
     private Date createTime;
 
+    private UserInfo userInfo;
+
     public UserFollowing() {
     }
 
-    public UserFollowing(Long id, Long userId, Long followingId, Long groupId, Date createTime) {
+    public UserFollowing(Long id, Long userId, Long followingId, Long groupId, Date createTime, UserInfo userInfo) {
         this.id = id;
         this.userId = userId;
         this.followingId = followingId;
         this.groupId = groupId;
         this.createTime = createTime;
+        this.userInfo = userInfo;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     public Long getId() {

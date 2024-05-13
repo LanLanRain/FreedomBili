@@ -12,4 +12,14 @@
         where userId = #{userId}
           and followingId = #{followingId}
     </delete>
+    <select id="getUserFollowings" resultType="com.rainsoul.bilibili.domain.UserFollowing">
+        select *
+        from t_user_following
+        where userId = #{userId}
+    </select>
+    <select id="getUserFans" resultType="com.rainsoul.bilibili.domain.UserFollowing">
+        select *
+        from t_user_following
+        where followingId = #{userId}
+    </select>
 </mapper>

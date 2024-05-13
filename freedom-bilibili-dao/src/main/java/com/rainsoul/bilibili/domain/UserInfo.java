@@ -13,6 +13,16 @@ public class UserInfo {
     private Date createTime;
     private Date updateTime;
 
+    private Boolean followed;
+
+    public Boolean getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(Boolean followed) {
+        this.followed = followed;
+    }
+
     public Long getId() {
         return id;
     }
