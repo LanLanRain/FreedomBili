@@ -27,7 +27,7 @@ public class TokenUtil {
         // 获取当前时间并设置Token过期时间为当前时间后30秒
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.SECOND, 30);
+        calendar.add(Calendar.SECOND, 300000);
         // 创建并签署JWT，包含用户ID、发行者、过期时间等信息
         return JWT.create().withKeyId(String.valueOf(userId))
                 .withIssuer(ISSUER)
