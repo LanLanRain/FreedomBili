@@ -24,6 +24,8 @@ public class AuthRoleMenu implements Serializable {
      */
     private Date createTime;
 
+    private AuthMenu authMenu;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -56,5 +58,13 @@ public class AuthRoleMenu implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public AuthMenu getAuthMenu() {
+        return authMenu;
+    }
+
+    public void setAuthMenu(AuthMenu authMenu) {
+        this.authMenu = authMenu;
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainsoul.bilibili.dao.AuthRoleMenuDao">
+    <!-- 定义一个 resultMap，用于将数据库中的数据映射到 AuthRoleMenu 实体类中，包括其关联的 AuthMenu 实体类属性 -->
+    <resultMap id="AuthMenuResultMap" type="com.rainsoul.bilibili.domain.auth.AuthRoleMenu">
+        <!-- 映射 AuthRoleMenu 的基本属性 -->
+        <id column="id" property="id"/>
+        <id column="roleId" property="roleId"/>
+        <id column="menuId" property="menuId"/>
+        <!-- 映射 AuthRoleMenu 关联的 AuthMenu 属性 -->
+        <association property="authMenu" javaType="com.rainsoul.bilibili.domain.auth.AuthMenu">
+            <result column="name" property="name"/> <!-- 映射 AuthMenu 的名称属性 -->
+            <result column="code" property="code"/> <!-- 映射 AuthMenu 的代码属性 -->
+        </association>
+    </resultMap>
+
+    <!-- 根据角色 ID 集合查询授权菜单信息 -->
+    <select id="getAuthRoleMenusByRoleIds" resultMap="AuthMenuResultMap">
+        select
+        arm.*,
+        am.name ,
+        am.code
+        from t_auth_role_menu arm
+        left join t_auth_menu am on arm.menuId = am.id
+        where
+        arm.roleId in
+        <foreach collection="roleIdSet" item="roleId" index="index" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </select>
+
+</mapper>

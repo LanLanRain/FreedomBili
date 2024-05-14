@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainsoul.bilibili.dao.AuthRoleElementOperationDao">
+
+    <!-- 定义一个 resultMap，用于映射 AuthRoleElementOperation 实体和数据库查询结果 -->
+    <resultMap id="AuthElementOperationResultMap" type="com.rainsoul.bilibili.domain.auth.AuthRoleElementOperation">
+        <!-- 映射 AuthRoleElementOperation 实体的 id 属性 -->
+        <id property="id" column="id"/>
+        <!-- 映射 AuthRoleElementOperation 实体的 roleId 属性 -->
+        <id property="roleId" column="roleId"/>
+        <!-- 映射 AuthRoleElementOperation 实体的 elementOperationId 属性 -->
+        <id property="elementOperationId" column="elementOperationId"/>
+        <!-- 映射 AuthRoleElementOperation 实体中包含的 AuthElementOperation 关联属性 -->
+        <association property="authElementOperation" javaType="com.rainsoul.bilibili.domain.auth.AuthElementOperation">
+            <!-- 映射 AuthElementOperation 实体的 elementName 属性 -->
+            <id property="elementName" column="elementName"/>
+            <!-- 映射 AuthElementOperation 实体的 operationType 属性 -->
+            <result property="operationType" column="operationType"/>
+            <!-- 映射 AuthElementOperation 实体的 elementCode 属性 -->
+            <result property="elementCode" column="elementCode"/>
+        </association>
+    </resultMap>
+
+    <!-- 定义一个查询语句，根据角色 ID 集合获取角色元素操作信息 -->
+    <select id="getRoleElementOperationsByRoleIds"
+            parameterType="java.util.Set" resultMap="AuthElementOperationResultMap">
+        <!-- 查询语句 -->
+        select
+        areo.*,
+        aeo.elementName,
+        aeo.operationType,
+        aeo.elementCode
+        from bilibili.t_auth_role_element_operation areo
+        left join t_auth_element_operation aeo on areo.elementOperationId = aeo.id
+        where areo.roleId in
+        <!-- 使用 foreach 循环处理角色 ID 集合，生成 SQL 的 in 条件 -->
+        <foreach collection="roleIdSet" item="roleId" index="index" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </select>
+
+</mapper>

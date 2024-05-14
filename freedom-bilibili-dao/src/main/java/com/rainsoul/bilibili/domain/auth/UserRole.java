@@ -8,6 +8,10 @@ public class UserRole {
     private Long roleId;
     private Date createTime;
 
+    private String roleName;
+
+    private String roleCode;
+
     public Long getId() {
         return id;
     }
@@ -38,5 +42,21 @@ public class UserRole {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
 }
